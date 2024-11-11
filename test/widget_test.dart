@@ -7,7 +7,7 @@ void main() {
     '''
     GIVEN the user is not authenticated
     WHEN they open the app
-    THEN the app displays the Apple Sign-In screen
+    THEN the app displays the Apple Sign-In button
     AND the user cannot access any other features until signed in.''',
     (WidgetTester tester) async {
       // GIVEN
