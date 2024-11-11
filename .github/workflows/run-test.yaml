@@ -3,11 +3,11 @@ name: Run tests
 
 on:
   push:
-    branhces:
+    branches:
       - main
 
 jobs:
-  - Run tests:
+  run-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
