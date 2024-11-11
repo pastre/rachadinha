@@ -1,0 +1,17 @@
+name: Run tests
+
+
+on:
+  push:
+    branhces:
+      - main
+
+jobs:
+  - Run tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Run Acceptance tests
+        run: flutter test
+

@@ -1,3 +1,12 @@
 
 # FVM Version Cache
 .fvm/
+build/native_assets/macos/native_assets.yaml
+build/test_cache/build/cache.dill.track.dill
+build/unit_test_assets/AssetManifest.bin
+build/unit_test_assets/AssetManifest.json
+build/unit_test_assets/FontManifest.json
+build/unit_test_assets/NOTICES.Z
+build/unit_test_assets/fonts/MaterialIcons-Regular.otf
+build/unit_test_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf
+build/unit_test_assets/shaders/ink_sparkle.frag
