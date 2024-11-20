@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:rachadinha/login_widget.dart';
 import 'package:rachadinha/main.dart';
@@ -17,6 +18,10 @@ void main() {
 
       // THEN
       expect(find.byType(LoginWidget), findsOne);
+
+      // AND
+      expect(find.widgetWithText(ElevatedButton, 'Sign in with Apple'),
+          findsOneWidget);
     },
   );
 }
