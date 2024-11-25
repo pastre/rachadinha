@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 
 class LoginWidget extends StatelessWidget {
-  const LoginWidget({super.key});
+  final VoidCallback onLoginPressed;
+
+  const LoginWidget({
+    required this.onLoginPressed,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child:
-            ElevatedButton(onPressed: () {}, child: Text('Sign in with Apple')),
+        child: ElevatedButton(
+          onPressed: onLoginPressed,
+          child: Text('Sign in with Apple'),
+        ),
       ),
     );
   }
