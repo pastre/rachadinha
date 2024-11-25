@@ -2,7 +2,24 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:meta/meta.dart';
-import 'package:rachadinha/main.dart';
+import 'package:rachadinha/app_launcher.dart';
+import 'package:rachadinha/authentication_protocol_driver.dart';
+
+class FakeAuthenticationProtocolDriver implements AuthenticationProtocolDriver {
+  bool _isSingnedInResponse = false;
+  @override
+  void signout() {}
+
+  @override
+  bool isSignedin() {
+    return _isSingnedInResponse;
+  }
+
+  @override
+  void signin() {
+    _isSingnedInResponse = true;
+  }
+}
 
 class TestDSL {
   final signInWithAppleButton =
@@ -12,15 +29,18 @@ class TestDSL {
 
   final WidgetTester tester;
 
+  final authenticationProtocolDriver = FakeAuthenticationProtocolDriver();
+
   TestDSL(this.tester);
 
   TestDSL signout() {
+    authenticationProtocolDriver.signout();
     return this;
   }
 
   TestDSL openApp() {
     _testSteps.add(
-      () => tester.pumpWidget(const AppLauncher()),
+      () => tester.pumpWidget(AppLauncher(authenticationProtocolDriver)),
     );
     return this;
   }
