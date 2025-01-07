@@ -21,4 +21,18 @@ void main() {
       dsl.signout().openApp().tapOnLoginButton().verifyHomeIsVisible();
     },
   );
+  testAcceptanceCriteria('''
+    GIVEN the app is open 
+    AND the user is not signed in
+    BUT sign in with apple is not available 
+    WHEN authenticate with apple 
+    THEN IT SHOULD display an error
+    ''', (TestDSL dsl) async {
+    dsl.authenticationProtocolDriver.setupFaultyAppleSignIn();
+    dsl
+        .signout()
+        .openApp()
+        .tapOnLoginButton()
+        .verifyToastWithMessage("fail to log in");
+  });
 }

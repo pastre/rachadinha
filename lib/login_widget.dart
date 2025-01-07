@@ -13,7 +13,14 @@ class LoginWidget extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: ElevatedButton(
-          onPressed: onLoginPressed,
+          onPressed: () {
+            try {
+              onLoginPressed();
+            } catch (e) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("fail to log in")));
+            }
+          },
           child: Text('Sign in with Apple'),
         ),
       ),

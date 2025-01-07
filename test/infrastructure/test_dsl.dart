@@ -7,6 +7,8 @@ import 'package:rachadinha/authentication_protocol_driver.dart';
 
 class FakeAuthenticationProtocolDriver implements AuthenticationProtocolDriver {
   bool _isSingnedInResponse = false;
+
+  bool _throwsOnSignin = false;
   @override
   void signout() {}
 
@@ -17,7 +19,12 @@ class FakeAuthenticationProtocolDriver implements AuthenticationProtocolDriver {
 
   @override
   void signin() {
+    if (_throwsOnSignin) throw 'Injected error';
     _isSingnedInResponse = true;
+  }
+
+  void setupFaultyAppleSignIn() {
+    _throwsOnSignin = true;
   }
 }
 
@@ -65,12 +72,19 @@ class TestDSL {
   }
 
   void _triggerUiUpdate() {
-    _testSteps.add(() => tester.pump());
+    _testSteps.add(() async => await tester.pump());
   }
 
   TestDSL verifySignInWithAppleIsVisible() {
     _testSteps.add(() => expect(signInWithAppleButton, findsOneWidget));
     return this;
+  }
+
+  void verifyToastWithMessage(String s) {
+    _triggerUiUpdate();
+    _triggerUiUpdate();
+    _triggerUiUpdate();
+    _testSteps.add(() => expect(find.text(s), findsOneWidget));
   }
 }
 
